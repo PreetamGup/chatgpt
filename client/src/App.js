@@ -42,7 +42,7 @@ useEffect(() => {
     //fetch response to the api combining the chat log array of messages and
     //sending it as a message to localhost:3000 as a port
 
-    const response =await fetch("http://localhost:3080/",{
+    const response =await fetch("https://chatgptserver-xk7m.onrender.com/",{
       method:"POST",
       headers:{
         "Content-Type": "application/json"
