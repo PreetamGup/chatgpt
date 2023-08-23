@@ -3,9 +3,11 @@ import "./App.css";
 import "./normal.css";
 
 import React ,{useState, useEffect, useRef} from "react"
+import ClipLoader from "react-spinners/ClipLoader";
 
 function App() {
   const [input, setInput] = useState("");
+  const [loading, setLoading]= useState(false);  
   const ref = useRef(null);
   const [chatlog, setChatlog] = useState([{
     user: "gpt",
@@ -15,7 +17,7 @@ function App() {
 ]);
 
 
-
+console.log(chatlog)
 useEffect(() => {
   if(ref.current){
     ref.current.scrollIntoView({ behavior: 'smooth' })
@@ -41,8 +43,8 @@ useEffect(() => {
 
     //fetch response to the api combining the chat log array of messages and
     //sending it as a message to localhost:3000 as a port
-
-    const response =await fetch("https://chatgptserver-xk7m.onrender.com/",{
+    setLoading(true);
+    const response =await fetch(" http://localhost:3080/",{
       method:"POST",
       headers:{
         "Content-Type": "application/json"
@@ -54,6 +56,8 @@ useEffect(() => {
 
     const data= await response.json();
     setChatlog([...newChat, {user: "gpt", message: ` ${data.message}` }])
+    setLoading(false);
+
     console.log(data.message);
 
   }
@@ -77,6 +81,17 @@ useEffect(() => {
           }
          
         </div>
+
+          <ClipLoader
+          loading={loading}
+          color="white"
+          size={25}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+          {/* {
+            loading?<div>Loading...</div> : ""
+          } */}
         <div className="chat-input-holder">
           <form onSubmit={handleSubmit}>
             <input
