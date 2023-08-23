@@ -1,7 +1,8 @@
 //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
-
+import fetch from "node-fetch";
+globalThis.fetch = fetch;
 import Bard from "bard-ai";
-import bard2 from "googlebard"
+// import bard2 from "googlebard"
 // const { Configuration, OpenAIApi }  require("openai");
 import  express from "express";
 import dotenv from "dotenv";
