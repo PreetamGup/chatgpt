@@ -1,4 +1,3 @@
-//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
 import fetch from "node-fetch";
 globalThis.fetch = fetch;
 import Bard from "bard-ai";
